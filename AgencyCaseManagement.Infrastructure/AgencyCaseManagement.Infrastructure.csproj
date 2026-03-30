@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Configurations\" />
-    <Folder Include="Data\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
 
@@ -25,5 +24,20 @@
   <ItemGroup>
     <ProjectReference Include="..\AgencyCaseManagement.Domain\AgencyCaseManagement.Domain.csproj" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Data/Cases-150.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Data/Clients-100.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Data/Meetings-100.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Data/Users-50.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
 </Project>

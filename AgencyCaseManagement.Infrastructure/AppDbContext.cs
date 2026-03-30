@@ -22,7 +22,7 @@ namespace AgencyCaseManagement.Infrastructure
         public DbSet<Organization> Organizations => Set<Organization>();
 
         //automatically settings for non-seeded saves
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<IBaseEntity>())
             {

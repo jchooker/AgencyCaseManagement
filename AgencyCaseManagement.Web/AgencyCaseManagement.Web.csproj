@@ -1,14 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.25">
@@ -19,8 +15,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AgencyCaseManagement.Application\AgencyCaseManagement.Application.csproj" />
     <ProjectReference Include="..\AgencyCaseManagement.Domain\AgencyCaseManagement.Domain.csproj" />
     <ProjectReference Include="..\AgencyCaseManagement.Infrastructure\AgencyCaseManagement.Infrastructure.csproj" />
   </ItemGroup>
+
+	<Target Name="NpmBuild" BeforeTargets="Build">
+		<Exec Command="npm run build:prod" WorkingDirectory="$(ProjectDir)" Condition="'$(Configuration)' == 'Release'" />
+		<Exec Command="npm run build" WorkingDirectory="$(ProjectDir)" Condition="'$(Configuration)' == 'Debug'" />
+	</Target>
+	<!--^^added by dev team: assists with moving webpack for js packages to other environments-->
 
 </Project>

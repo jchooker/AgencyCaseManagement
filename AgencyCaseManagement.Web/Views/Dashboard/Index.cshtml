@@ -1,0 +1,64 @@
+﻿@{
+    ViewData["Title"] = "Dashboard Page";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/views/dashboard/index.css" asp-append-version="true" />
+}
+
+<div class="text-center d-flex justify-content-evenly flex-column">
+    <h1 class="display-4 text-light h1-shadow">Welcome to dashboard index</h1>
+    <div class="row mt-4">
+
+        <div class="col-5 d-flex">
+            <div class="card w-100 h-100">
+                <div class="card-header d-flex flex-row">
+                    <i class="fa-solid fa-list-check mt-1"></i>
+                    <h5 class="ps-2">Tasks and workflows</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex flex-column gap-3">
+                        <div class="card w-100">
+                            <div class="card-body">
+                                Task 1
+                            </div>
+
+                        </div>
+                        <div class="card w-100">
+                            <div class="card-body">
+                                Task 2
+                            </div>
+                        </div>
+                    </div>
+@*                     <div class="container-fluid">
+                        <div class="row">
+                            <div class="col flex-fill">
+                                <div class="card w-100">
+                                    <div class="card-body">
+                                        Task 1
+                                    </div>
+                                </div>
+
+                                <div class="card w-100">
+                                    <div class="card-body">
+                                        Task 2
+                                    </div>
+                                </div>
+                            </div> *@
+@*                             <div class="col d-flex flex-column">
+                            </div> *@
+
+@*                         </div>
+                    </div> *@
+                </div>
+            </div>
+        </div>
+        <div id="calendar" class="col-7">
+@*                 <i class="fa-solid fa-calendar-day"></i> *@
+        </div>
+
+    </div>
+
+</div>
+@section Scripts {
+    <script src="~/js/dist/dashboard-index.bundle.js"></script>
+}

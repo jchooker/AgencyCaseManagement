@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="AgencyCaseManagement.Application/AgencyCaseManagement.Application.csproj" />
   <Project Path="AgencyCaseManagement.Domain/AgencyCaseManagement.Domain.csproj" />
   <Project Path="AgencyCaseManagement.Infrastructure/AgencyCaseManagement.Infrastructure.csproj" />
   <Project Path="AgencyCaseManagement.Web/AgencyCaseManagement.Web.csproj" />

@@ -15,7 +15,7 @@ namespace AgencyCaseManagement.Domain.Entities
         public MeetingType MeetingType { get; set; } = MeetingType.General;
 
         //FKs
-        public Guid CaseId { get; set; }
+        public Guid? CaseId { get; set; }
 
         //nav properties
         public Case Case { get; set; } = null!;
