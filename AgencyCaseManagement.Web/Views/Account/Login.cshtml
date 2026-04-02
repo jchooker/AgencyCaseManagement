@@ -1,0 +1,25 @@
+﻿
+@model AgencyCaseManagement.Application.DTOs.LoginDTO
+@{
+    ViewData["Title"] = "Log In";
+}
+
+<div class="container-fluid row d-flex justify-content-center">
+    <div class="card col-8 shadow pb-3">
+        <div class="card-header">Log In</div>
+        <div class="card-body">
+            <form>
+                <label for="username-or-email" class="form-label">
+                    Username or Email:
+                </label>
+                <input id="username-or-email" class="form-control mb-3" />
+                <label for="password-input" class="form-label">
+                    Password:
+                </label>
+                <input id="password-input" class="form-control mb-4" />
+                <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                <div class="form-text">Don't have an account? <a asp-controller="Account" asp-action="Register">Register here.</a></div>
+            </form>
+        </div>
+    </div>
+</div>

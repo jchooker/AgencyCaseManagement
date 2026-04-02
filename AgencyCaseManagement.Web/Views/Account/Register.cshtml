@@ -1,0 +1,45 @@
+﻿@model AgencyCaseManagement.Application.DTOs.RegisterDTO
+@{
+    ViewData["Title"] = "Register";
+}
+@* pre-seeded users exist but don’t yet have passwords.
+
+Using:
+
+await _userManager.GeneratePasswordResetTokenAsync(user);
+lets me create a secure one-time setup flow instead of manually setting PasswordHash. *@
+@* Then your future SetPassword action would use:
+
+await _userManager.ResetPasswordAsync(user, token, model.Password);
+That’s the correct Identity pattern. *@
+<div class="container-fluid row d-flex justify-content-center">
+    <div class="card col-8">
+        <div class="card-header">Register</div>
+        <div class="card-body">
+            <form>
+                <label for="username-or-email" class="form-label">
+                    Email:
+                </label>
+                <input id="username-or-email" class="form-control mb-3" />
+                <label for="password-input" class="form-label">
+                   Create Password:
+                </label>
+                <input id="password-input" class="form-control mb-3" />
+                <label for="password-input-2" class="form-label">
+                    Confirm Password:
+                </label>
+                <input id="password-input-2" class="form-control mb-3" />
+                <label for="fn-input" class="form-label">
+                    First Name:
+                </label>
+                <input id="fn-input" class="form-control mb-3" />
+                <label for="ln-input" class="form-label">
+                    Last Name:
+                </label>
+                <input id="ln-input" class="form-control mb-3" />
+                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>
