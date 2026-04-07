@@ -25,6 +25,10 @@
     <ProjectReference Include="..\AgencyCaseManagement.Infrastructure\AgencyCaseManagement.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\views\account\" />
+  </ItemGroup>
+
 	<Target Name="NpmBuild" BeforeTargets="Build">
 		<Exec Command="npm run build:prod" WorkingDirectory="$(ProjectDir)" Condition="'$(Configuration)' == 'Release'" />
 		<Exec Command="npm run build" WorkingDirectory="$(ProjectDir)" Condition="'$(Configuration)' == 'Debug'" />

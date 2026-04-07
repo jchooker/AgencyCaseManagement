@@ -94,24 +94,24 @@ namespace AgencyCaseManagement.Web.Controllers
         {
             if (!ModelState.IsValid) return View(model);
 
-            var user = new User
+            var dto = new RegisterDTO
             {
-                Id = Guid.NewGuid(),
                 Email = model.Email,
                 UserName = model.UserName,
-                EmailConfirmed = false //if you want to confirm later
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Password = model.Password,
+                ConfirmPassword = model.ConfirmPassword
             };
 
-            var result = await _userManager.CreateAsync(user, model.Password);
+            var result = await _accountService.RegisterAsync(dto);
 
-            if (result.Succeeded) 
+            if (!result.Succeeded) 
             { 
-                await _signInManager.SignInAsync(user, isPersistent: false);
-                return RedirectToAction("Index", "Dashboard");
+                foreach (var error in result.Errors)
+                    ModelState.AddModelError("", error);
             }
 
-            foreach (var error in result.Errors)
-                ModelState.AddModelError("", error.Description);
 
             return View(model);
 

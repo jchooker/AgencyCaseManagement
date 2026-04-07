@@ -1,4 +1,5 @@
-﻿@model AgencyCaseManagement.Application.DTOs.RegisterDTO
+﻿@* @model AgencyCaseManagement.Application.DTOs.RegisterDTO *@
+@model AgencyCaseManagement.Web.ViewModels.RegisterViewModel
 @{
     ViewData["Title"] = "Register";
 }
@@ -16,30 +17,54 @@ That’s the correct Identity pattern. *@
     <div class="card col-8">
         <div class="card-header">Register</div>
         <div class="card-body">
-            <form>
-                <label for="username-or-email" class="form-label">
-                    Email:
-                </label>
-                <input id="username-or-email" class="form-control mb-3" />
-                <label for="password-input" class="form-label">
-                   Create Password:
-                </label>
-                <input id="password-input" class="form-control mb-3" />
-                <label for="password-input-2" class="form-label">
-                    Confirm Password:
-                </label>
-                <input id="password-input-2" class="form-control mb-3" />
-                <label for="fn-input" class="form-label">
-                    First Name:
-                </label>
-                <input id="fn-input" class="form-control mb-3" />
-                <label for="ln-input" class="form-label">
-                    Last Name:
-                </label>
-                <input id="ln-input" class="form-control mb-3" />
+            <form asp-action="Register" method="post">
+                @* ^^does not need 'asp-controller' attrib due to View being in /Account/ (& thus being served by AccountController)
+                    ; also need to leave out "Async" suffix, which .net core strips
+                *@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="mb-3">
+                    <label asp-for="FirstName" class="form-label">
+                        First Name:
+                    </label>
+                    <input asp-for="FirstName" id="fn-input" class="form-control mb-3" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="LastName" class="form-label">
+                        Last Name:
+                    </label>
+                    <input asp-for="LastName" id="ln-input" class="form-control mb-3" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Email" for="email" class="form-label">
+                        Email:
+                    </label>
+                    <input asp-for="Email" id="username-or-email" class="form-control mb-3" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Password" for="password-input" class="form-label">
+                       Create Password:
+                    </label>
+                    <input asp-for="Password" id="password-input" class="form-control mb-3" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="ConfirmPassword" class="form-label">
+                        Confirm Password:
+                    </label>
+                    <input asp-for="ConfirmPassword" id="password-input-2" class="form-control mb-3" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
                 <button type="submit" class="btn btn-primary">Register</button>
-                <button type="button" class="btn btn-secondary">Cancel</button>
+                <a class="btn btn-secondary" asp-controller="Dashboard" asp-action="Index">Cancel</a>
             </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/views/account/register.js"></script>
+}

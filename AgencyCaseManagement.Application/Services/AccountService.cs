@@ -35,7 +35,6 @@ namespace AgencyCaseManagement.Application.Services
             if (string.IsNullOrWhiteSpace(dto.Email) ||
                 string.IsNullOrWhiteSpace(dto.FirstName) ||
                 string.IsNullOrWhiteSpace(dto.LastName) ||
-                string.IsNullOrWhiteSpace(dto.UserName) ||
                 string.IsNullOrWhiteSpace(dto.Password) ||
                 string.IsNullOrWhiteSpace(dto.ConfirmPassword)
                 )
@@ -43,7 +42,6 @@ namespace AgencyCaseManagement.Application.Services
                 result.Errors.Add("All fields are required.");
                 return result;
             }
-
             //confirm pw match
             if (dto.Password != dto.ConfirmPassword)
             {
@@ -59,18 +57,41 @@ namespace AgencyCaseManagement.Application.Services
                 return result;
             }
 
-            var existingByUserName = await _userManager.FindByNameAsync(dto.UserName);
-            if (existingByUserName != null)
+            //unique username construction
+            var safeFirst = dto.FirstName?.Replace(" ", "").Replace("'", "").Replace("-", "") ?? "";
+            var safeLast = dto.LastName?.Replace(" ", "").Replace("'", "").Replace("-", "") ?? "";
+
+            var firstInitial = safeFirst.Length > 0 ? safeFirst.Substring(0, 1) : "";
+            var uniqueUserName = $"{firstInitial}{safeLast}";
+            int counter = 0;
+            bool isTaken;
+
+            do
             {
-                result.Errors.Add("An account with this Username already exists! Please select a unique Username.");
-                return result;
-            }
+                var candidate = counter == 0 ? uniqueUserName : $"{firstInitial}{safeLast}{counter}";
+
+                //check db for whether username exists
+                var existingUser = await _userManager.FindByNameAsync(candidate);
+                isTaken = existingUser != null;
+
+                if (!isTaken)
+                    uniqueUserName = candidate;
+
+                counter++;
+            } while (isTaken);
+
+            //var existingByUserName = await _userManager.FindByNameAsync(dto.UserName);
+            //if (existingByUserName != null)
+            //{
+            //    result.Errors.Add("An account with this Username already exists! Please select a unique Username.");
+            //    return result;
+            //}
 
             var user = new User
             {
                 Id = Guid.NewGuid(),
                 Email = dto.Email,
-                UserName = dto.UserName,
+                UserName = uniqueUserName,
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 EmailConfirmed = false
